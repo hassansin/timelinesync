@@ -5,8 +5,10 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-				'public/lib/bootstrap/dist/css/bootstrap.min.css',
-				'public/lib/bootstrap/dist/css/bootstrap-theme.min.css',
+				'public/lib/mobile-angular-ui/dist/css/mobile-angular-ui-hover.min.css',
+				'public/lib/mobile-angular-ui/dist/css/mobile-angular-ui-base.min.css',
+				'public/lib/mobile-angular-ui/dist/css/mobile-angular-ui-desktop.min.css',
+				'public/application.css'								
 			],
 			js: [
 				'public/lib/angular/angular.min.js',
