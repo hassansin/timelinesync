@@ -7,7 +7,7 @@ var ApplicationConfiguration = function () {
         'ngResource',
         'ngAnimate',
         'ui.router',
-        'ui.bootstrap',
+        'mobile-angular-ui',
         'ui.utils'
       ];
     // Add a new vertical module
@@ -167,8 +167,21 @@ angular.module('core').controller('HeaderController', [
 ]);'use strict';
 angular.module('core').controller('HomeController', [
   '$scope',
+  '$location',
   'Authentication',
-  function ($scope, Authentication) {
+  function ($scope, $location, Authentication) {
+    // This provides Authentication context.
+    $scope.authentication = Authentication;
+    //If user is not signed in then redirect to signin page
+    if (!$scope.authentication.user)
+      $location.path('/signin');
+  }
+]);'use strict';
+angular.module('core').controller('TopController', [
+  '$scope',
+  '$location',
+  'Authentication',
+  function ($scope, $location, Authentication) {
     // This provides Authentication context.
     $scope.authentication = Authentication;
   }
@@ -176,16 +189,20 @@ angular.module('core').controller('HomeController', [
 //Menu service used for managing  menus
 angular.module('core').service('Menus', [function () {
     // Define a set of default roles
-    this.defaultRoles = ['user'];
+    this.defaultRoles = ['*'];
     // Define the menus object
     this.menus = {};
     // A private function for rendering decision 
     var shouldRender = function (user) {
       if (user) {
-        for (var userRoleIndex in user.roles) {
-          for (var roleIndex in this.roles) {
-            if (this.roles[roleIndex] === user.roles[userRoleIndex]) {
-              return true;
+        if (!!~this.roles.indexOf('*')) {
+          return true;
+        } else {
+          for (var userRoleIndex in user.roles) {
+            for (var roleIndex in this.roles) {
+              if (this.roles[roleIndex] === user.roles[userRoleIndex]) {
+                return true;
+              }
             }
           }
         }
@@ -245,7 +262,7 @@ angular.module('core').service('Menus', [function () {
         menuItemClass: menuItemType,
         uiRoute: menuItemUIRoute || '/' + menuItemURL,
         isPublic: isPublic === null || typeof isPublic === 'undefined' ? this.menus[menuId].isPublic : isPublic,
-        roles: roles || this.defaultRoles,
+        roles: roles === null || typeof roles === 'undefined' ? this.menus[menuId].roles : roles,
         position: position || 0,
         items: [],
         shouldRender: shouldRender
@@ -266,7 +283,7 @@ angular.module('core').service('Menus', [function () {
             link: menuItemURL,
             uiRoute: menuItemUIRoute || '/' + menuItemURL,
             isPublic: isPublic === null || typeof isPublic === 'undefined' ? this.menus[menuId].items[itemIndex].isPublic : isPublic,
-            roles: roles || this.defaultRoles,
+            roles: roles === null || typeof roles === 'undefined' ? this.menus[menuId].items[itemIndex].roles : roles,
             position: position || 0,
             shouldRender: shouldRender
           });
