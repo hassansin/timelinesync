@@ -1,5 +1,12 @@
 <section class="row" data-ng-controller="SettingsController">
-	<h3 class="col-md-12 text-center">Edit your profile</h3>
+	<div content-for="title">
+	    <span>Profile</span>
+	</div>	
+	<div content-for="navbarActionLeft">            
+		<a href="#!/" class="btn btn-navbar">
+			<i class="fa fa-home fa-lg"></i>
+		</a>
+    </div>
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 			<fieldset>

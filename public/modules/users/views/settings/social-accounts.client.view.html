@@ -1,5 +1,5 @@
 <section class="row" data-ng-controller="SettingsController">
-	<h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
+	<!-- <h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
 	<div class="col-md-12 text-center">
 		<div data-ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="remove-account-container">
 			<img ng-src="/modules/users/img/buttons/{{providerName}}.png">
@@ -7,23 +7,25 @@
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 		</div>
+	</div> -->
+	<div data-ng-hide="isConnectedSocialAccount('dropbox')">
+		<h4 class="col-md-12 text-center">Connect to your dropbox account:</h4>
+		<div class="col-md-12 text-center">
+			<a href="/auth/dropbox" class="undecorated-link">
+				<img src="/modules/users/img/buttons/dropbox.png">
+			</a>			
+		</div>
 	</div>
-	<h3 class="col-md-12 text-center">Connect other social accounts:</h3>
-	<div class="col-md-12 text-center">
-		<a href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/facebook.png">
-		</a>
-		<a href="/auth/twitter" data-ng-hide="isConnectedSocialAccount('twitter')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/twitter.png">
-		</a>
-		<a href="/auth/google" data-ng-hide="isConnectedSocialAccount('google')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/google.png">
-		</a>
-		<a href="/auth/linkedin" data-ng-hide="isConnectedSocialAccount('linkedin')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/linkedin.png">
-		</a>
-		<a href="/auth/github" data-ng-hide="isConnectedSocialAccount('github')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/github.png">
-		</a>
+	<div data-ng-show="isConnectedSocialAccount('dropbox')">
+		<h4 class="col-md-12 text-center">You're connected!</h4>
+		<div class="col-md-12 text-center">
+			<div class="remove-account-container">
+				<img ng-src="/modules/users/img/buttons/dropbox.png">
+				<a class="btn btn-danger btn-remove-account btn-xs" data-ng-click="removeUserSocialAccount('dropbox')">
+					<i class="fa fa-times-circle"></i>
+				</a>
+			</div>			
+		</div>
 	</div>
+	
 </section>

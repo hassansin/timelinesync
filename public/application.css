@@ -1,0 +1,45 @@
+@import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+
+*{font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;}
+a.list-group-item {position: relative;}
+a.list-group-item .list-group-item-icon {position: absolute;top: 50%;right: 1%;margin-top: -10px;display: none}
+a.list-group-item:hover .list-group-item-icon,a.list-group-item:focus .list-group-item-icon{display: block}
+i.indicator {color:green;}
+i.indicator.uploading{color:red;}
+.date{font-size: .9em;font-style: italic;}
+#case-list .list-group-item-text { padding: 5px 0px 5px 5px}
+.navbar-absolute-bottom.navbar-app .btn, .navbar-absolute-bottom.navbar-app .btn-navbar {line-height: 30px;}
+
+#case-list{padding-top: 40px;}
+.app-search{
+	border-bottom: 2px solid #0099CC;
+	background: transparent;
+	padding-bottom: 0;
+  font-size: 1.2em;	
+}
+.app-search-container{
+	width: 70%;
+	margin: 0 auto;	
+	position: relative;
+}
+.app-search-container:before, .app-search-container:after{
+  content:'';
+  display: block;
+   
+  position: absolute;
+  bottom: 2px;
+   
+  height: 6px;
+  border-left: 2px solid #0099CC;
+}
+.app-search-container:before{
+  left: 0;
+}
+.app-search-container:after{
+  right: 0;
+}
+.form-horizontal .form-group{padding-top: 0;}
+.btn.btn-navbar{padding-left: 7px;padding-right: 7px;}
+.fa.fa-lg{font-size: 1.22em;}
+/*.list-group-item.media { margin: 5px;}
+a.list-group-item:hover {background-color: #007AFF;}*/

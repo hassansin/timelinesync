@@ -1,45 +1,45 @@
-<section class="row" data-ng-controller="AuthenticationController">
-	<h3 class="col-md-12 text-center">Sign in using your social accounts</h3>
-	<div class="col-md-12 text-center">
-		<a href="/auth/facebook" class="undecorated-link">
-			<img src="/modules/users/img/buttons/facebook.png">
-		</a>
-		<a href="/auth/twitter" class="undecorated-link">
-			<img src="/modules/users/img/buttons/twitter.png">
-		</a>
-		<a href="/auth/google" class="undecorated-link">
-			<img src="/modules/users/img/buttons/google.png">
-		</a>
-		<a href="/auth/linkedin" class="undecorated-link">
-			<img src="/modules/users/img/buttons/linkedin.png">
-		</a>
-		<a href="/auth/github" class="undecorated-link">
-			<img src="/modules/users/img/buttons/github.png">
-		</a>
-	</div>
-	<h3 class="col-md-12 text-center">Or with your account</h3>
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
-		<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off">
-			<fieldset>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label>
-					<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">
-				</div>
-				<div class="text-center form-group">
-					<button type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;
-					<a href="/#!/signup">Sign up</a>
-				</div>
-				<div class "forgot-password">
-					<a href="/#!/password/forgot">Forgot your password?</a>
-				</div>
-				<div data-ng-show="error" class="text-center text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
+<section data-ng-controller="AuthenticationController">			
+	<div class="scrollable">
+		<div class="scrollable-content section">
+			<h3 class="text-center">Signin with Dropbox</h3>		   
+			<div class="col-md-12 text-center">
+				<a href="/auth/dropbox" class="undecorated-link">
+					<img src="/modules/users/img/buttons/dropbox-small.png">
+				</a>
+			</div>
+			<p>&nbsp;</p>
+			<!-- <h4 class="text-center">Or with your account</h4>
+			<form data-ng-submit="signin()" class="signin form-horizontal" autocomplete="off" action="" id="">	
+				<div class="panel">
+  					<div class="panel-body">     					
+						<div class="form-group row">
+							<div class="form-control-wrapper col-xs-12">
+								<input type="text" id="username" name="username" data-ng-model="credentials.username" placeholder="username" class="form-control">
+							</div>
+						</div>		       		      
+						<div class="form-group row">
+							<div class="form-control-wrapper col-xs-12">
+								<input type="password" id="password" name="password" data-ng-model="credentials.password" placeholder="password" class="form-control"> 
+							</div>
+						</div>		        		       						
+						<div data-ng-show="error" class="text-center text-danger">
+							<strong data-ng-bind="error"></strong>
+						</div>
+		  			</div>
+				</div>				
+				<div bs-panel class="form-actions">			      					
+			        <div class="text-center">
+						<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+					</div>
+
+					<div class="forgot-password text-center">
+						<a href="/#!/password/forgot">Forgot your password?</a>
+					</div>					
+			    </div>
+		   	</form>						
+			<div class="text-center">
+				<a class="btn btn-default" href="/#!/signup">Sign up</a>
+			</div> -->
+		</div>
 	</div>
 </section>
