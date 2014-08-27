@@ -20,6 +20,11 @@ module.exports = {
 		css: 'public/dist/application.min.css',
 		js: 'public/dist/application.min.js'
 	},
+	dropbox : {
+		clientID: 'b4qas6a6edcikvd',
+    clientSecret: 'o9956p89xhtrkbe',
+    callbackURL: 'http://localhost:3000/auth/dropbox/callback'
+	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
 		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
