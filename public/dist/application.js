@@ -175,7 +175,7 @@ angular.module('core').controller('HomeController', [
     //If user is not signed in then redirect to signin page
     if (!$scope.authentication.user)
       return $location.path('/signin');
-    if (!$scope.authentication.isDbConnected)
+    if (!$scope.authentication.isDbConnected())
       return $location.path('/settings/accounts');
   }
 ]);'use strict';
@@ -526,9 +526,9 @@ angular.module('users').controller('SettingsController', [
 // Authentication service for user variables
 angular.module('users').factory('Authentication', [function () {
     var _this = this;
-    _this._data = {
-      user: window.user,
-      isDbConnected: window.user && window.user.additionalProvidersData && window.user.additionalProvidersData['dropbox']
+    _this._data = { user: window.user };
+    _this._data['isDbConnected'] = function () {
+      return _this._data.user && _this._data.user.additionalProvidersData && _this._data.user.additionalProvidersData['dropbox'];
     };
     return _this._data;
   }]);'use strict';
