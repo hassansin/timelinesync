@@ -174,7 +174,9 @@ angular.module('core').controller('HomeController', [
     $scope.authentication = Authentication;
     //If user is not signed in then redirect to signin page
     if (!$scope.authentication.user)
-      $location.path('/signin');
+      return $location.path('/signin');
+    if (!$scope.authentication.isDbConnected)
+      return $location.path('/settings/accounts');
   }
 ]);'use strict';
 angular.module('core').controller('TopController', [
@@ -524,7 +526,10 @@ angular.module('users').controller('SettingsController', [
 // Authentication service for user variables
 angular.module('users').factory('Authentication', [function () {
     var _this = this;
-    _this._data = { user: window.user };
+    _this._data = {
+      user: window.user,
+      isDbConnected: window.user && window.user.additionalProvidersData && window.user.additionalProvidersData['dropbox']
+    };
     return _this._data;
   }]);'use strict';
 // Users service used for communicating with the users REST endpoint
