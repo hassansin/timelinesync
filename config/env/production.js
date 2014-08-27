@@ -26,7 +26,7 @@ module.exports = {
 	dropbox : {
 		clientID: 'b4qas6a6edcikvd',
     clientSecret: 'o9956p89xhtrkbe',
-    callbackURL: 'http://localhost:3000/auth/dropbox/callback'
+    callbackURL: 'https://timelinesync.com/auth/dropbox/callback'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
