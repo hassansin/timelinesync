@@ -19,7 +19,7 @@ angular.module('core').controller('TopController', ['$scope','$location', 'Authe
       else{
       	$scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-check-circle text-success"></i> Synchronized'); 
       }	          
-		})
+		});
 
 	}
 ]);

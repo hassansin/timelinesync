@@ -1,4 +1,5 @@
 'use strict';
+/* global Dropbox:true */
 
 angular.module('cases').controller('ActivityController', ['$scope','$location', 'Authentication','$timeout','$filter','$stateParams','$http',
 	function($scope,$location, Authentication,$timeout,$filter,$stateParams,$http) {
@@ -43,10 +44,10 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	      })
 	      .success(function(data) {        
 	        if(data && data.success){          
-	          if(action && action == 1){
+	          if(action && action === '1'){
 	            window.location.href='mailto:?subject='+ encodeURIComponent(data.title)+'&body=%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + encodeURIComponent('Download from: '+data.url);          
 	          }            
-	          else if(action && action == 2){            
+	          else if(action && action === '2'){            
 	            var options = {
 	              files: [                  
 	                  {'url':data.url, 'filename': data.title+'.docx'}
@@ -72,7 +73,7 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	            
 	        }
 	      });
-	    }
+	    };
 
 	    $scope.$on('syncStatusChanged',function(event){            
 	      if(!$scope.datastore.getSyncStatus().uploading){
@@ -81,15 +82,15 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	      }
 	    });
 
-	    $scope.$on('recordChanged',function(event,records){
+	    $scope.$on('recordChanged',function(event,recordsChanged){
 
-	      var records = records.affectedRecordsForTable('activities');
+	      var records = recordsChanged.affectedRecordsForTable('activities'),s_ndx,curr_record;	     
 	      for(var ndx in records){
 	        var record = records[ndx];
 	        if(record.isDeleted()){
-	          for(var s_ndx in $scope.activities){
-	            var curr_record = $scope.activities[s_ndx];
-	            if(curr_record.getId() == record.getId()){
+	          for(s_ndx in $scope.activities){
+	            curr_record = $scope.activities[s_ndx];
+	            if(curr_record.getId() === record.getId()){
 	              $scope.activities.splice($scope.activities.indexOf(curr_record), 1);
 	              //deleted task
 	              break;
@@ -100,9 +101,9 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	          $scope.authentication.dropstore.dirtyActivites.push(records[ndx].getId());
 	          var found= false;
 	          //task is new or updated.
-	          for(var s_ndx in $scope.activities){
-	            var curr_record = $scope.activities[s_ndx];
-	            if(curr_record.getId() == record.getId()){
+	          for(s_ndx in $scope.activities){
+	            curr_record = $scope.activities[s_ndx];
+	            if(curr_record.getId() === record.getId()){
 	              $scope.activities[$scope.activities.indexOf(curr_record)] = record;
 	              found = true;
 	              //udpate task
@@ -205,11 +206,11 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
     	$scope.saveActivity = function(a){            
 	      var matched = a.activity_time.match(/(?:(\d{1,2})(\d{2})(am|pm))|(?:(\d+):(\d+)\s*(am|pm))/i);
 	      if(matched){
-	        matched = matched.filter(function(x){return x!==undefined});
+	        matched = matched.filter(function(x){return x!==undefined;});
 	      }      
 	      if(matched && matched.length === 4){
 	        var time = new Date($filter('date')($scope.case_record.get('activity_date'),'MM/dd/yyyy') + ' ' + matched[1]+':'+matched[2]+' '+matched[3]);        
-	        if(time == "Invalid Date"){
+	        if(time === 'Invalid Date'){
 	          alert('Invalid Time');
 	        }else{
 	          a.activity_time = time;          
@@ -225,11 +226,11 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	    $scope.addActivity = function(a){            
 	      var matched = a.activity_time? a.activity_time.match(/(?:(\d{1,2})(\d{2})(am|pm))|(?:(\d+):(\d+)\s*(am|pm))/i):'';
 	      if(matched){
-	        matched = matched.filter(function(x){return x!==undefined});
+	        matched = matched.filter(function(x){return x!==undefined;});
 	      }      
 	      if(matched && matched.length === 4){
 	        var time = new Date($filter('date')($scope.case_record.get('activity_date'),'MM/dd/yyyy') + ' ' + matched[1]+':'+matched[2]+' '+matched[3]);
-	        if(time == "Invalid Date"){
+	        if(time === 'Invalid Date'){
 	          alert('Invalid Time');          
 	        }
 	        else{
@@ -254,12 +255,12 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	      }
 	    });
 
-	    $scope.$on('recordChanged',function(event,records){      
-	      var records = records.affectedRecordsForTable('activities');
+	    $scope.$on('recordChanged',function(event,recordsChanged){      
+	      var records = recordsChanged.affectedRecordsForTable('activities');
 	      for(var ndx in records){
 	        var record = records[ndx];
 	        if(record.isDeleted()){
-	          //
+	          void 0;
 	        }
 	        else{   
 	          $scope.authentication.dropstore.dirtyActivites.push(records[ndx].getId());          

@@ -22,9 +22,7 @@ angular.module('core').controller('HomeController', ['$scope','$location', 'Auth
 	    $scope.caseFilter = function(c){    
 	      var kw = $scope.keyword.toLowerCase();
 	      var date = $filter('date')(c.get('activity_date'),'MM/dd/yyyy');
-	      var match = c.get('client').toLowerCase().match(kw) || c.get('case_no').match(kw) 
-	        || c.get('first_name').toLowerCase().match(kw) || c.get('last_name').toLowerCase().match(kw)
-	        || date.match(kw);
+	      var match = c.get('client').toLowerCase().match(kw) || c.get('case_no').match(kw) || c.get('first_name').toLowerCase().match(kw) || c.get('last_name').toLowerCase().match(kw) || date.match(kw);
 	      return match && match.length;
 	    };	   	   	   
 	    //$scope.selectedCases = timelineService.getInvoiceItems(); //selected cases for invoice

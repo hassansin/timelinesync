@@ -18,7 +18,7 @@ angular.module('users')
         }
       });
       return deferred.promise;
-    }
+    };
     return dropstoreServices;
   })
   .factory('dropstoreDatastoreManager', ['$q', function($q){
@@ -36,7 +36,7 @@ angular.module('users')
             dropstoreDatastoreManagerService._datastore = datastore;
             deferred.resolve(datastore);
           }           
-        })
+        });
         return deferred.promise;
       };
       dropstoreDatastoreManagerService.SubscribeRecordsChanged = function(callback){        
@@ -51,7 +51,7 @@ angular.module('users')
         dropstoreDatastoreManagerService._client.signOut(options,function(err){                             
           return callback(err);
         });        
-      }
+      };
       return dropstoreDatastoreManagerService;
     };    
   }])
@@ -65,7 +65,7 @@ angular.module('users')
           },200);
         })(element);        
       }
-    }
+    };
   })
   .directive('ngReallyClick', [function() {
       return {
@@ -78,7 +78,7 @@ angular.module('users')
                   }
               });
           }
-      }
+      };
   }])  
   .directive('syncFocusWith', function ($timeout) {
     return function (scope, elem, attrs) {
@@ -86,4 +86,4 @@ angular.module('users')
         elem[0].focus();
       });
     };
-  })
+  });
