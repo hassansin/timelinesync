@@ -10,13 +10,19 @@ var passport = require('passport'),
 module.exports = function() {
 	// Use local strategy
 	passport.use(new LocalStrategy({
-			usernameField: 'username',
+			usernameField: 'email',
 			passwordField: 'password'
 		},
 		function(username, password, done) {
-			User.findOne({
-				username: username
-			}, function(err, user) {
+			var conditions = {};
+      if (username.indexOf('@') === -1) {
+        conditions.username = username;
+      }
+      else {
+        conditions.email = username;
+      }
+
+			User.findOne(conditions, function(err, user) {
 				if (err) {
 					return done(err);
 				}

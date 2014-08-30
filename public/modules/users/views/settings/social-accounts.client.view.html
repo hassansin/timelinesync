@@ -1,36 +1,45 @@
-<section class="row" data-ng-controller="SettingsController">
+<section data-ng-controller="SettingsController">
 	<div content-for="navbarActionLeft">            
 		<a href="#!/" class="btn btn-navbar">
 			<i class="fa fa-home fa-lg"></i>
 		</a>
-    </div>
-	<!-- <h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
-	<div class="col-md-12 text-center">
-		<div data-ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="remove-account-container">
-			<img ng-src="/modules/users/img/buttons/{{providerName}}.png">
-			<a class="btn btn-danger btn-remove-account" data-ng-click="removeUserSocialAccount(providerName)">
-				<i class="glyphicon glyphicon-trash"></i>
-			</a>
-		</div>
-	</div> -->
-	<div data-ng-hide="isConnectedSocialAccount('dropbox')">
-		<h4 class="col-md-12 text-center">Connect to your dropbox account:</h4>
-		<div class="col-md-12 text-center">
-			<a href="/auth/dropbox" class="undecorated-link">
-				<img src="/modules/users/img/buttons/dropbox.png">
-			</a>			
-		</div>
-	</div>
-	<div data-ng-show="isConnectedSocialAccount('dropbox')">
-		<h4 class="col-md-12 text-center">You're connected!</h4>
-		<div class="col-md-12 text-center">
-			<div class="remove-account-container">
-				<img ng-src="/modules/users/img/buttons/dropbox.png">
-				<a class="btn btn-danger btn-remove-account btn-xs" data-ng-click="removeUserSocialAccount('dropbox')">
-					<i class="fa fa-times-circle"></i>
-				</a>
-			</div>			
-		</div>
-	</div>
+    </div>	
+    <div id="userAccount" class="scrollable">  
+		<div class="scrollable-content">
+			<div data-ng-hide="isConnectedSocialAccount('dropbox')" bs-panel title="Connect Dropbox:">	     									
+				<div class="text-center">
+					<a href="/auth/dropbox" class="undecorated-link btn btn-default">
+						<img width="60" src="/modules/users/img/buttons/dropbox.png">
+					</a>			
+				</div>
+			</div>
+			<div data-ng-show="isConnectedSocialAccount('dropbox')" bs-panel title="You're now connected.">	     									
+				<div class="text-center">
+					<a data-ng-click="removeUserSocialAccount('dropbox')" class="undecorated-link btn btn-default active">
+						<img width="60" src="/modules/users/img/buttons/dropbox.png">						
+					</a>			
+				</div>
+			</div>						
 	
+			<form data-ng-submit="changeUserPassword()" autocomplete="off">
+				<div bs-panel title="Change Password">	     					
+					<input bs-form-control type="password" ng-model="passwordDetails.currentPassword" label="Current Password"/>
+			        <input bs-form-control type="password" ng-model="passwordDetails.newPassword" label="New Password"/>
+
+			        <input bs-form-control type="password" ng-model="passwordDetails.verifyPassword" label="Verify Password"/>
+
+			        
+			        <div data-ng-show="success" class="text-center text-success">
+						<strong>Password Changed Successfully</strong>
+					</div>
+					<div data-ng-show="error" class="text-center text-danger">
+						<strong data-ng-bind="error"></strong>
+					</div>	
+				</div>
+				<div bs-panel class="form-actions">			      					
+					<input type="submit" class="btn btn-large btn-primary btn-block" value="Save Password"/>												        			   
+			    </div>								
+			</form>	
+		</div>
+	</div>
 </section>

@@ -1,0 +1,61 @@
+<section data-ng-controller="ActivityController">	
+	<div content-for="navbarActionLeft">
+		<a title="Case List" href="#!/" class="btn btn-navbar">
+	  		<i class="fa fa-arrow-left fa-lg"></i>
+	  	</a>
+	  	<a title="Manage Case" href="#!/new/case/{{caseId}}" class="btn btn-navbar">
+	  		<i class="fa fa-gear fa-lg"></i>
+	  	</a>
+	  	<a title="Add Activity" href="#!/new/activity/{{caseId}}/" class="btn btn-navbar">
+	  		<i class="fa fa-plus fa-lg"></i>
+	  	</a>
+	</div>
+	<div content-for="navbarBottomLeft">
+	  <a href="#!/" class="btn btn-navbar pull-left">
+	    <i class="fa fa-home fa-lg"></i>
+	  </a>
+	  <a href="#!/new/activity/{{caseId}}/" class="btn btn-navbar pull-left">
+	    <i class="fa fa-plus fa-lg"></i>
+	  </a>
+	</div>
+	<div content-for="title">
+	  <span>Activity List</span>
+	</div>
+
+	
+	<div id="activity-list" class="scrollable">  
+	  <div class="scrollable-content">
+	    <div bs-panel title="Case">	     
+			<ul class="list-unstyled">
+				<li><strong>Case No:</strong> {{case.get('case_no')}}</li>
+			  	<li><strong>Client:</strong> {{case.get('client')}}</li>
+			  	<li><strong>Subject:</strong> {{case.get('first_name') + ' ' + case.get('last_name') }}</li>
+			  	
+			</ul>				
+		</div>
+		<!-- <iframe width=0 height=0 src="{{downloadUrl}}"></iframe> -->
+		<div style="margin-bottom: 0" bs-panel title="Activities <a class='pull-right' href='' ng-click='downloadAct()'><i class='fa fa-download text-primary'></i></a>">	     
+		</div>			
+
+		<div class="list-group">	      
+	     	<a href="#!/new/activity/{{caseId + '/' +act.getId()}}" class="list-group-item media" 
+	     	ng-repeat="(index, act) in activities | orderBy:activityOrder:reverse">
+	        	<div class="pull-right list-group-item-icon">
+	          		<i class="fa fa-chevron-right feature-icon text-primary"></i>
+	        	</div>	        
+	        	<div class="media-body">
+	        		<h4 class="list-group-item-heading"></h4>	            
+		        	<div class="list-group-item-text">
+		        		<p>
+		        			<i class="fa fa-info-circle indicator pull-right" ng-class="{uploading: dirtyActivites.indexOf(act.getId()) > -1}"></i>
+							<!-- <span class="label label-primary">{{act.get('activity_type')}}</span> -->
+							<span class="text-danger"><strong>{{act.get('activity_time') | date: 'hh:mm a' }}</strong></span>
+						</p>
+						<p>{{act.get('activity')}}</p>
+		        	</div>
+	        	</div>
+	      	</a>					
+	    </div>		
+	  </div>
+	</div>
+</section>

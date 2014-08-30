@@ -6,36 +6,64 @@
 		<a href="#!/" class="btn btn-navbar">
 			<i class="fa fa-home fa-lg"></i>
 		</a>
-    </div>
-	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
-		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
-			<fieldset>
-				<div class="form-group">
-					<label for="firstName">First Name</label>
-					<input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
+    </div>	
+    <div content-for="navbarBottomLeft">
+	  <button data-ng-click="updateUserProfile(userForm.$valid)" class="btn btn-navbar pull-left">
+	    <i class="fa fa-save fa-lg"></i>
+	  </button>
+	</div>
+    <div id="userProfile" class="scrollable">  
+		<div class="scrollable-content">
+			<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" >
+				<br>
+				<div bs-panel title="">	     					
+					<input bs-form-control type="text" ng-model="userProfile.companyName" label="Company" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        placeholder=""/>		        		      
+			        <input bs-form-control type="text" ng-model="userProfile.firstName" label="First" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        required placeholder=""/>		        		       
+			        <input bs-form-control type="text" ng-model="userProfile.lastName" label="Last" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        required placeholder=""/>	
+			        <input bs-form-control type="text" ng-model="userProfile.phone" label="Phone" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        required placeholder=""/>	
+			        <input bs-form-control type="text" ng-model="userProfile.email" label="Email" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        required placeholder=""/>	
+			        <textarea rows="3" bs-form-control ng-model="userProfile.invoiceBillingTerms" label="Billing Terms" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        required placeholder=""></textarea>
+			        <input bs-form-control type="text" ng-model="userProfile.companyAddress1" label="Address1" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        placeholder=""/>	
+
+			        <input bs-form-control type="text" ng-model="userProfile.companyAddress2" label="Address2" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        placeholder=""/>	
+
+			        <input bs-form-control type="text" ng-model="userProfile.companyCity" label="City" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        placeholder=""/>	
+
+			        <input bs-form-control type="text" ng-model="userProfile.companyState" label="State" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        placeholder=""/>	
+			        <input bs-form-control type="text" ng-model="userProfile.companyZip" label="Zip" 
+			        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+			        placeholder=""/>		    
+			        <div data-ng-show="success" class="text-center text-success">
+						<strong>Profile Saved Successfully</strong>
+					</div>
+					<div data-ng-show="error" class="text-center text-danger">
+						<strong data-ng-bind="error"></strong>
+					</div>	
 				</div>
-				<div class="form-group">
-					<label for="lastName">Last Name</label>
-					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" placeholder="Last Name">
-				</div>
-				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
-				</div>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
-				</div>
-				<div class="text-center form-group">
-					<button type="submit" class="btn btn-large btn-primary">Save Profile</button>
-				</div>
-				<div data-ng-show="success" class="text-center text-success">
-					<strong>Profile Saved Successfully</strong>
-				</div>
-				<div data-ng-show="error" class="text-center text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-			</fieldset>
-		</form>
+				<div bs-panel class="form-actions">			      					
+					<input type="submit" class="btn btn-large btn-primary btn-block" value="Save Profile"/>												        			   
+			    </div>				
+			</form>	
+		</div>
 	</div>
 </section>

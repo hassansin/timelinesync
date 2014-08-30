@@ -1,8 +1,30 @@
 <section data-ng-controller="HomeController">	
 	<div content-for="navbarActionLeft">            
-		<a href="" class="btn btn-navbar">
+		<a href="#!/new/case/" class="btn btn-navbar">
 			<i class="fa fa-plus fa-lg"></i>
 		</a>
     </div>
-    Case list view
+    <div class="app-search-container">
+		<input type="search" ng-model="keyword" class="form-control app-search" placeholder="Search.." />	
+	</div>			
+	
+	<div id="case-list" class="scrollable">  
+	  <div class="scrollable-content">
+	    <div class="list-group">	      
+	      <a href="#!/activity/{{case.getId()}}" class="list-group-item media" ng-repeat="(index, case) in cases | orderBy:caseOrder:reverse | filter:caseFilter ">
+	        <div class="pull-right list-group-item-icon">
+	          <i class="fa fa-chevron-right feature-icon text-primary"></i>
+	        </div>	        
+	        <div class="media-body">
+	        	<h4 class="list-group-item-heading">{{case.get('case_no')}}</h4>	            
+	        	<p class="list-group-item-text">
+					<strong>Client: </strong>{{case.get('client')}}<br>	        		
+					<strong>Subject: </strong>{{case.get('first_name') + ' ' + case.get('last_name') }}
+					<span class="date text-default pull-right">{{case.get('activity_date') | date:'MM/dd/yyyy'}}</span>
+	        	</p>
+	        </div>
+	      </a>
+	    </div>
+	  </div>
+	</div>
 </section>

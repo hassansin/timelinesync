@@ -1,9 +1,25 @@
 'use strict';
 
 
-angular.module('core').controller('TopController', ['$scope','$location', 'Authentication',
-	function($scope,$location, Authentication) {
+angular.module('core').controller('TopController', ['$scope','$location', 'Authentication','$sce',
+	function($scope,$location, Authentication,$sce) {
 		// This provides Authentication context.
 		$scope.authentication = Authentication;		
+		$scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-warning text-warning"></i> Disconnected');
+
+		Authentication.connectDropstore().then(function(){			
+			$scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-check-circle text-success"></i> Connected'); 		
+	  });
+
+		$scope.$on('syncStatusChanged',function(){
+			$scope.datastore = $scope.authentication.dropstore.datastore;			
+			if($scope.datastore.getSyncStatus().uploading){
+				$scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-spinner fa-spin text-warning"></i> Synchronizing');      
+      }
+      else{
+      	$scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-check-circle text-success"></i> Synchronized'); 
+      }	          
+		})
+
 	}
 ]);

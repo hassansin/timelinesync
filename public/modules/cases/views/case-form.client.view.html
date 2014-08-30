@@ -1,0 +1,55 @@
+<section data-ng-controller="NewCaseController">	
+	<div content-for="title">
+	  <span>{{caseId?'Manage Case':'New Case'}}</span>
+	</div>
+	<div content-for="navbarActionLeft">
+		<a href="{{caseId?'#!/activity/'+caseId:'#!/'}}" class="btn btn-navbar">
+      		<i class="fa fa-arrow-left fa-lg"></i>
+      	</a>
+    </div>	
+
+	
+	<div id="" class="scrollable">  
+	  <div class="scrollable-content">
+		<form name="caseForm" action="" id="">	
+			<div bs-panel title="">	     
+				<input bs-form-control type="text" ng-model="case.client" label="Client" 
+		        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+		        required placeholder="Client"/>		        		       
+
+				<input bs-form-control type="text" ng-model="case.case_no" label="Case #" 
+		        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+		        required placeholder="case no"/>		        		       
+
+		        <input bs-form-control type="text" ng-model="case.first_name" label="First Name" 
+		        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+		        required placeholder="first name"/>		        		       
+
+		        <input bs-form-control type="text" ng-model="case.last_name" label="Last Name" 
+		        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"
+		        required placeholder="last name"/>				    
+
+		    	<input bs-form-control type="date" ng-model="case.activity_date" label="Date"
+		        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"  
+		        required placeholder="activity date"/>		      				    
+			</div>
+			<div bs-panel class="form-actions">			      
+				<button ng-show="caseId" ng-click="toggle('myOverlay', 'on')" class="btn btn-danger pull-left">
+		          Delete
+		        </button>			      
+		        <button ng-click="caseId?saveCase(case):addCase(case)" 
+		        class="btn btn-primary pull-right" ng-disabled="caseForm.$invalid">
+		          Save
+		        </button>			      
+		    </div>
+		</form>
+	  </div>
+	</div>
+	<div overlay="myOverlay">
+	  <h4 class="overlay-title">Are you sure?</h4>  
+	  <p toggle="off" bubble target="myOverlay">
+	    <span ng-click="deleteCase(case_record)" class="btn btn-primary">Yes</span>
+	    <span class="btn btn-default">No</span>
+	  </p>  
+	</div>
+</section>

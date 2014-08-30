@@ -1,11 +1,55 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-	function($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication','$timeout','$filter','$stateParams','$rootScope',
+	function($scope, $http, $location, Users, Authentication,$timeout,$filter,$stateParams,$rootScope) {
 		$scope.user = Authentication.user;
-
+		$scope.passwordDetails = {};
+		
 		// If user is not signed in then redirect back home
-		if (!$scope.user) $location.path('/');
+		if (!$scope.user) $location.path('/');		
+
+				
+		Authentication.connectDropstore().then(function(data){						
+			$scope.datastore = $scope.authentication.dropstore.datastore;					
+			var info = $scope.datastore.getTable('info').query({type:'tlsUserProfile'});      
+			$scope.userProfile = info.length?info[0].getFields(): {
+				companyName:'',
+				firstName:'',
+				lastName:'',
+				phone:'',
+				email:'',
+				invoiceBillingTerms: '',
+				companyAddress1:'',
+				companyAddress2:'',
+				companyCity: '',
+				companyState:'',
+				companyZip:'',
+				type:'tlsUserProfile'
+			};      			
+			$scope.userProfile = angular.extend($scope.userProfile,{firstName: $scope.user.firstName, email:$scope.user.email,lastName: $scope.user.lastName});			
+			// Update a user profile
+			$scope.updateUserProfile = function(isValid) {
+				if (isValid){
+					$scope.success = $scope.error = null;
+					var user = new Users($scope.userProfile);					
+		
+					user.$update(function(response) {
+						$scope.success = true;
+						Authentication.user = response;
+						//save to dropbox
+						if(info.length && !angular.equals(info[0].getFields(),$scope.userProfile)){
+		          info[0].update($scope.userProfile);
+		        }else if(info.length===0){
+		          $scope.datastore.getTable('info').insert($scope.userProfile);
+		        }
+					}, function(response) {
+						$scope.error = response.data.message;
+					});
+				} else {
+					$scope.submitted = true;
+				}
+			};
+		});
 
 		// Check if there are additional accounts 
 		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
@@ -38,27 +82,11 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			});
 		};
 
-		// Update a user profile
-		$scope.updateUserProfile = function(isValid) {
-			if (isValid){
-				$scope.success = $scope.error = null;
-				var user = new Users($scope.user);
-	
-				user.$update(function(response) {
-					$scope.success = true;
-					Authentication.user = response;
-				}, function(response) {
-					$scope.error = response.data.message;
-				});
-			} else {
-				$scope.submitted = true;
-			}
-		};
+		
 
-		// Change user password
+		// Change user password		
 		$scope.changeUserPassword = function() {
-			$scope.success = $scope.error = null;
-
+			$scope.success = $scope.error = null;			
 			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
 				// If successful show success message and clear form
 				$scope.success = true;

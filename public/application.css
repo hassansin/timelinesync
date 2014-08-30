@@ -38,8 +38,17 @@ i.indicator.uploading{color:red;}
 .app-search-container:after{
   right: 0;
 }
+.form-control{border-radius:0;}
 .form-horizontal .form-group{padding-top: 0;}
 .btn.btn-navbar{padding-left: 7px;padding-right: 7px;}
 .fa.fa-lg{font-size: 1.22em;}
 /*.list-group-item.media { margin: 5px;}
 a.list-group-item:hover {background-color: #007AFF;}*/
+
+#userProfile .control-label{text-align: right;}
+#userProfile .form-group{padding: 2px 0;}
+#userProfile .form-control {height: 30px; padding: 3px 6px}
+#userProfile .control-label {line-height: 30px;padding-right: 0;}
+#userProfile textarea.form-control{height: auto;}
+
+#userAccount .form-group{padding: 0;}

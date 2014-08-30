@@ -1,0 +1,52 @@
+<section data-ng-controller="NewActivityController">	
+	<div content-for="title">
+	  <span>{{activityId?'Manage Activity':'New Activity'}}</span>
+	</div>	
+	<div content-for="navbarActionLeft">
+		<a href="{{'#!/activity/'+caseId}}" class="btn btn-navbar">
+      		<i class="fa fa-arrow-left fa-lg"></i>
+      	</a>
+    </div>
+
+	<div id="" class="scrollable">  
+	  <div class="scrollable-content">
+		<form name="activityForm" action="" id="">	
+			<div bs-panel title="">	    
+				<div ng-show="!activityId && last_activity_time" class="form-group row">
+					<label class="control-label col-xs-4 col-sm-2 col-lg-3">Last activity</label>
+					<div class="form-control-wrapper col-xs-8 col-sm-10 col-lg-9">
+						<span style="line-height: 35px;" class="label label-info">{{last_activity_time}}</span>
+					</div>
+				</div>
+				<!-- <select  bs-form-control ng-model="activity.activity_type" Label="Type"
+				label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9">
+					<option value="">None</option>
+					<option value="Base D">Base D</option>
+					<option value="Base A">Base A</option>
+				</select> -->
+		    	<input focus-and-select bs-form-control type="text" ng-model="activity.activity_time" label="Time"
+		        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"  
+		        required placeholder="activity time"/>
+		        <textarea rows="10" bs-form-control ng-model="activity.activity" label="Activity"
+		        label-class="col-xs-4 col-sm-2 col-lg-3" class="col-xs-8 col-sm-10 col-lg-9"  
+		        required placeholder="activity"></textarea>
+			</div>
+			<div bs-panel class="form-actions">			      
+				<button ng-show="activityId" ng-click="toggle('myOverlay', 'on')" class="btn btn-danger pull-left">
+		          Delete
+		        </button>			      
+		        <button ng-click="activityId? saveActivity(activity):addActivity(activity)" class="btn btn-primary pull-right" ng-disabled="activityForm.$invalid">
+		          Save
+		        </button>			      
+		    </div>
+		</form>
+	  </div>
+	</div>
+	<div overlay="myOverlay">
+	  <h4 class="overlay-title">Are you sure?</h4>  
+	  <p toggle="off" bubble target="myOverlay">
+	    <span ng-click="deleteActivity(activity_record)" class="btn btn-primary">Yes</span>
+	    <span class="btn btn-default">No</span>
+	  </p>  
+	</div>
+</section>
