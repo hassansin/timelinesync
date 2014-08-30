@@ -1,0 +1,15 @@
+<section data-ng-controller="InvoiceController">	
+	<div content-for="navbarActionLeft">            
+		<a href="#!/" class="btn btn-navbar">
+			<i class="fa fa-home fa-lg"></i>
+		</a>		
+    </div>
+    <div content-for="title">
+    	<span>Invoice</span>
+    </div>
+	<div id="invoice" class="scrollable">  
+	  <div class="scrollable-content">
+	    {{invoice | json }}
+	  </div>
+	</div>
+</section>

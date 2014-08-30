@@ -41,8 +41,9 @@
 */
 *{font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;}
 a.list-group-item {position: relative;}
-a.list-group-item .list-group-item-icon {position: absolute;top: 50%;right: 1%;margin-top: -10px;display: none}
-a.list-group-item:hover .list-group-item-icon,a.list-group-item:focus .list-group-item-icon{display: block}
+a.list-group-item .list-group-item-icon {position: absolute;top: 50%;right: 1%;margin-top: -10px;}
+a.list-group-item .fa-chevron-right {display: none;}
+a.list-group-item:hover .fa-chevron-right,a.list-group-item:focus .fa-chevron-right{display: block}
 i.indicator {color:green;}
 i.indicator.uploading{color:red;}
 .date{font-size: .9em;font-style: italic;}
@@ -50,12 +51,21 @@ i.indicator.uploading{color:red;}
 .navbar-absolute-bottom.navbar-app .btn, .navbar-absolute-bottom.navbar-app .btn-navbar {line-height: 30px;}
 
 #case-list{padding-top: 40px;}
+#case-list a.list-group-item.active, #case-list a.list-group-item.active:focus{
+  background: #F5F5F5;
+  border-color: #fff;
+  color: #000;
+}
+#case-list a.list-group-item.active .list-group-item-text,#case-list a.list-group-item.active:focus .list-group-item-text{
+  color: #000
+}
 .app-search{
 	border-bottom: 2px solid #0099CC;
 	background: transparent;
 	padding-bottom: 0;
   font-size: 1.2em;	
 }
+.app-search.ng-valid.ng-dirty{border-bottom: 2px solid #0099CC;}
 .app-search-container{
 	width: 70%;
 	margin: 0 auto;	

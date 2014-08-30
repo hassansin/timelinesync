@@ -269,4 +269,114 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	    });	                 	                
 		});
 	}
+])
+.controller('InvoiceController', ['$scope','$location', 'Authentication','$timeout','$filter','$stateParams','$rootScope','$http',
+	function($scope,$location, Authentication,$timeout,$filter,$stateParams,$rootScope,$http) {
+		// This provides Authentication context.
+		$scope.authentication = Authentication;				
+
+		//If user is not signed in then redirect to signin page
+		if (!$scope.authentication.user) return $location.path('/signin');
+		if (!$scope.authentication.isDbAuthorized()) return $location.path('/settings/accounts');								
+		if (!$scope.authentication.dropstore.selectedCases) return $location.path('/');
+		
+		Authentication.connectDropstore().then(function(){			
+			$scope.datastore = $scope.authentication.dropstore.datastore;		
+			var caseIds = $scope.authentication.dropstore.selectedCases;                  
+
+      var data = [];      
+      var activityTable = $scope.datastore.getTable('activities');        
+      var caseTable = $scope.datastore.getTable('cases');
+      var infoTable = $scope.datastore.getTable('info');
+      var totalQuantity = 0;
+
+      //loop through selected case ids
+      angular.forEach(caseIds,function(id,key){
+        var caseFields = caseTable.get(id).getFields(); //get case
+        caseFields.full_name = caseFields.first_name + ' ' + caseFields.last_name;
+        caseFields.id = id;
+        var actList = activityTable.query({caseId:id}); // get all activities for this case
+        var activities = [];
+        var departureTime = 0;
+        var arrivalTime = 0;        
+
+        //loop through activities
+        angular.forEach(actList,function(act,key){
+          var actFields = act.getFields();
+          activities.push(actFields);
+          if(actFields.activity_type==='Base D')
+            departureTime = actFields.activity_time.getTime();
+          if(actFields.activity_type==='Base A')
+            arrivalTime = actFields.activity_time.getTime();
+        });
+
+        
+
+        data.push({
+          'case': caseFields,
+          /*'activities' : activities,*/
+          'quantity' : (arrivalTime - departureTime)/(1000*60*60),
+          'unitCost': ''          
+        });
+      });
+
+      $scope.subTotal = function() {
+        var total = 0.00;
+        angular.forEach($scope.invoice.items, function(item, key){
+          total += (item.quantity * item.unitCost);
+        });
+        return total;
+      };
+      $scope.removeItem = function (item){
+        $scope.invoice.items.splice($scope.invoice.items.indexOf(item), 1);
+      };
+      $scope.addItem = function (){
+        $scope.invoice.items.push({
+          'case': {},
+          description: '',
+          activities : [],
+          quantity: 1 ,
+          unitCost: ''
+        });
+      };
+      $scope.downloadInvoice = function ($attach){                
+                
+        $http({
+          method  : 'POST',
+          url     : 'download_invoice.php',
+          data    : $scope.invoice,  // pass in data as strings
+          headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+        })
+        .success(function(data) {
+          console.log(data);
+          if(data && data.success){
+            if($attach)
+              window.location.href='mailto:?subject='+ encodeURIComponent(data.title)+'&body=%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + encodeURIComponent('Download from: '+data.url);
+            else{              
+              //$document.find('body').append(angular.element('<iframe></iframe>').attr('src',data.url).attr('class','ng-hide'));              
+              window.location.href=data.url;
+              //window.open(data.url);
+            }              
+          }
+        });
+      };
+      var info = infoTable.query({type:'tlsUserProfile'});
+      info = info.length?info[0].getFields(): {};
+      //var invoiceNo = parseInt(info.lastInvoiceNo)? info.lastInvoiceNo.replace(parseInt(info.lastInvoiceNo),parseInt(info.lastInvoiceNo)+1) : '';
+
+      $scope.invoice = {
+        id : caseIds.sort().toString(),
+        items: data,
+        date: $filter('date')(new Date(),'MMM dd, yyyy'),
+        timezoneOffset : new Date().getTimezoneOffset(),
+        phone: info.phone || '',
+        company: info.companyName || '',
+        address1: info.companyAddress1 || '',
+        address2: info.companyAddress2 || '',
+        invoiceNo: '', 
+        terms: info.invoiceBillingTerms || '',
+        paid: 0  
+      };          
+		});
+	}
 ]);

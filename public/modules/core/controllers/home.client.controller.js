@@ -17,7 +17,6 @@ angular.module('core').controller('HomeController', ['$scope','$location', 'Auth
 	    $scope.caseOrder = function(c){      
 	      return c.get($scope.orderProp);
 	    };
-
 	    $scope.caseFilter = function(c){    
 	      var kw = $scope.keyword.toLowerCase();
 	      var date = $filter('date')(c.get('activity_date'),'MM/dd/yyyy');
@@ -25,6 +24,7 @@ angular.module('core').controller('HomeController', ['$scope','$location', 'Auth
 	      return match && match.length;
 	    };	   	   	   
 	    //$scope.selectedCases = timelineService.getInvoiceItems(); //selected cases for invoice
+	    $scope.authentication.dropstore.selectedCases = $scope.selectedCases = [];	    
 	    $scope.addAllToSelection = function(event){
 	      if(event.target.checked) {
 	        angular.forEach($scope.cases,function(val,key){
@@ -34,16 +34,24 @@ angular.module('core').controller('HomeController', ['$scope','$location', 'Auth
 	      else
 	        $scope.selectedCases = [];
 	    };
-	    $scope.addToSelection = function (event,caseId){
-	      if(event.target.checked)
-	        $scope.selectedCases.push(caseId);     
-	      else
-	        $scope.selectedCases.splice($scope.selectedCases.indexOf(caseId),1);
+	    $scope.addToSelection = function (event,caseId){	    	
+	    	if($scope.selectionMode){ //in selection mode enabled
+	    		event.preventDefault(); //prevent href 
+	    		if($scope.selectedCases.indexOf(caseId) >-1){	    			
+	    			$scope.selectedCases.splice($scope.selectedCases.indexOf(caseId),1);	
+	    		}
+	    		else{
+	    			$scope.selectedCases.push(caseId);     		    			
+	    		}
+	    	}
 	      console.log($scope.selectedCases);
 	    };
 	    $scope.prepareInvoice = function (){
 	      //timelineService.setInvoiceItems($scope.selectedCases);
-	      $location.path('/invoice');
+	      if($scope.selectedCases.length){
+	      	$location.path('/invoice');	
+	      }
+	      
 	    };   	      
 		});
 	}

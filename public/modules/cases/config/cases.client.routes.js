@@ -16,6 +16,10 @@ angular.module('cases').config(['$stateProvider',
 		.state('newActivity',{
 			url: '/new/activity/:caseId/{activityId:(?:[^/]+)?}',
 			templateUrl: 'modules/cases/views/activity-form.client.view.html'
+		})
+		.state('invoice',{
+			url: '/invoice',
+			templateUrl: 'modules/cases/views/invoice.client.view.html'
 		});
 	}
 ]);
