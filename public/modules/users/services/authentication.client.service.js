@@ -25,7 +25,7 @@ angular.module('users').factory('Authentication', [
 
 			//lets connect to dropstore service			
 			var _datastoreManager;
-	    var client = new Dropbox.Client({key: 'quk9uarfbckjpd9',token:_this._data.isDbAuthorized()});    
+	    var client = new Dropbox.Client({key: $window.dropboxAppId,token:_this._data.isDbAuthorized()});    
 	    var c = dropstoreClient.create(client)
 	      .authenticate({interactive: false})
 	      .then(function(datastoreManager){                                	        

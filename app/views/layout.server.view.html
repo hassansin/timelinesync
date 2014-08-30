@@ -83,7 +83,7 @@
         <div class="btn-group pull-left" yield-to="navbarBottomLeft">          
         </div>
 
-        <div ng-bind-html="connectionStatus" class="pull-right" style="line-height:28px;color:#5A6F64;margin-right:20px" id="status"></div>
+        <div ng-show="authentication.user" ng-bind-html="connectionStatus" class="pull-right" style="line-height:28px;color:#5A6F64;margin-right:20px" id="status"></div>
       </div>      
 
       <div class="app-body" style="background-color:#fff">
@@ -97,6 +97,8 @@
 	<!--Embedding The User Object-->
 	<script type="text/javascript">
 		var user = {{ user | json | safe }};
+		var dropboxAppId = '{{dropboxAppId}}';
+		var cachebrk = '{{cachebrk}}';
 	</script>
 	<script src="https://www.dropbox.com/static/api/dropbox-datastores-1.1-latest.js" type="text/javascript"></script>	
 	<!--Application JavaScript Files-->

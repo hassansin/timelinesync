@@ -24,8 +24,8 @@ module.exports = {
 		js: 'public/dist/application.min.js'
 	},
 	dropbox : {
-		clientID: 'b4qas6a6edcikvd',
-    clientSecret: 'o9956p89xhtrkbe',
+		clientID: 'quk9uarfbckjpd9',
+    clientSecret: 'l4stpf33aqoy226',
     callbackURL: 'https://timelinesync.com/auth/dropbox/callback'
 	},
 	facebook: {
@@ -54,13 +54,18 @@ module.exports = {
 		callbackURL: 'http://localhost:3000/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'MAILER_FROM',
+		from: process.env.MAILER_FROM || 'Timelinesync <no-reply@timelinesync.com>',
 		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+			port: 587,
+			host: 'timelinesync.com',			 	
+			secure: false,
+			maxConnections: 5,
+    	maxMessages: 10,
+    	debug: true,
 			auth: {
-				user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
-				pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
-			}
+				user: process.env.MAILER_EMAIL_ID || 'postmaster@timelinesync.com',
+				pass: process.env.MAILER_PASSWORD || 'fnty8lPMtbbo'
+			}			
 		}
 	}
 };

@@ -30,10 +30,12 @@ module.exports = function(db) {
 	});
 
 	// Setting application local variables
+	app.locals.cachebrk = 'cachebkr01';
 	app.locals.title = config.app.title;
 	app.locals.description = config.app.description;
 	app.locals.keywords = config.app.keywords;
 	app.locals.facebookAppId = config.facebook.clientID;
+	app.locals.dropboxAppId = config.dropbox.clientID;
 	app.locals.jsFiles = config.getJavaScriptAssets();
 	app.locals.cssFiles = config.getCSSAssets();
 
