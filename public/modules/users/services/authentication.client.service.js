@@ -18,9 +18,9 @@ angular.module('users').factory('Authentication', [
 			}			
 		};
 
-		_this._data.connectDropstore = function(){						
+		_this._data.connectDropstore = function(){									
 			//return if already connected
-			if(_this._data.dropstore.c)
+			if(_this._data.dropstore.datastore)
 				return _this._data.dropstore.c;
 
 			//lets connect to dropstore service			
@@ -40,7 +40,7 @@ angular.module('users').factory('Authentication', [
 	        /*============== Add broadcast events ===============*/
 
 	        //0.
-	        //$rootScope.$broadcast('dropstoreConnected');
+	        $rootScope.$broadcast('dropstoreConnected');
 
 	        //1.
 	        $window.onbeforeunload = function (e) {

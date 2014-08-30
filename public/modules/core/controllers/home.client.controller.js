@@ -7,8 +7,7 @@ angular.module('core').controller('HomeController', ['$scope','$location', 'Auth
 
 		//If user is not signed in then redirect to signin page
 		if (!$scope.authentication.user) return $location.path('/signin');
-		if (!$scope.authentication.isDbAuthorized()) return $location.path('/settings/accounts');								
-		
+		if (!$scope.authentication.isDbAuthorized()) return $location.path('/settings/accounts');										
 		Authentication.connectDropstore().then(function(data){			
 			$scope.datastore = $scope.authentication.dropstore.datastore;		
 			$scope.cases =  $scope.datastore.getTable('cases').query();        			
