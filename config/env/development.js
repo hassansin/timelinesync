@@ -36,14 +36,11 @@ module.exports = {
 		callbackURL: 'http://localhost:3000/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'MAILER_FROM',
+		from: process.env.MAILER_FROM || 'Timelinesync <no-reply@timelinesync.com>',
 		options: {
 			port: 587,
-			host: 'timelinesync.com',			 	
-			secure: false,
-			maxConnections: 5,
-    	maxMessages: 10,
-    	debug: true,
+			host: 'timelinesync.com',			 										
+			tls: {rejectUnauthorized: false},    	
 			auth: {
 				user: process.env.MAILER_EMAIL_ID || 'postmaster@timelinesync.com',
 				pass: process.env.MAILER_PASSWORD || 'fnty8lPMtbbo'

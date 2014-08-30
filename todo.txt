@@ -1,0 +1,4 @@
+1) Figure out why tls: {rejectUnauthorized: false} in mailer option
+
+2) Enable Slide animation in ng-view
+

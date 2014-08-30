@@ -58,10 +58,7 @@ module.exports = {
 		options: {
 			port: 587,
 			host: 'timelinesync.com',			 	
-			secure: false,
-			maxConnections: 5,
-    	maxMessages: 10,
-    	debug: true,
+			tls: {rejectUnauthorized: false},		    
 			auth: {
 				user: process.env.MAILER_EMAIL_ID || 'postmaster@timelinesync.com',
 				pass: process.env.MAILER_PASSWORD || 'fnty8lPMtbbo'
