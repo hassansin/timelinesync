@@ -5,10 +5,8 @@ var ApplicationConfiguration = function () {
     var applicationModuleName = 'mean';
     var applicationModuleVendorDependencies = [
         'ngResource',
-        'ngAnimate',
         'ui.router',
-        'mobile-angular-ui',
-        'ui.utils'
+        'mobile-angular-ui'
       ];
     // Add a new vertical module
     var registerModule = function (moduleName, dependencies) {
@@ -509,21 +507,17 @@ angular.module('cases').controller('ActivityController', [
           unitCost: ''
         });
       };
-      $scope.downloadInvoice = function ($attach) {
+      $scope.downloadInvoice = function () {
         $http({
           method: 'POST',
           url: 'download_invoice.php',
           data: $scope.invoice,
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }).success(function (data) {
-          console.log(data);
+          //console.log(data);
           if (data && data.success) {
-            if ($attach)
-              window.location.href = 'mailto:?subject=' + encodeURIComponent(data.title) + '&body=%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + encodeURIComponent('Download from: ' + data.url);
-            else {
-              //$document.find('body').append(angular.element('<iframe></iframe>').attr('src',data.url).attr('class','ng-hide'));              
-              window.location.href = data.url;  //window.open(data.url);
-            }
+            //$document.find('body').append(angular.element('<iframe></iframe>').attr('src',data.url).attr('class','ng-hide'));              
+            window.location.href = data.url;  //window.open(data.url);            
           }
         });
       };
@@ -535,12 +529,18 @@ angular.module('cases').controller('ActivityController', [
         items: data,
         date: $filter('date')(new Date(), 'MMM dd, yyyy'),
         timezoneOffset: new Date().getTimezoneOffset(),
-        phone: info.phone || '',
-        company: info.companyName || '',
-        address1: info.companyAddress1 || '',
-        address2: info.companyAddress2 || '',
+        phone: 'Phone: ' + info.phone,
+        companyName: info.companyName || '',
+        address: [
+          info.companyAddress1,
+          info.companyAddress2,
+          info.state,
+          info.zip
+        ].filter(function (item) {
+          return item;
+        }).join(', '),
         invoiceNo: '',
-        terms: info.invoiceBillingTerms || '',
+        invoiceBillingTerms: info.invoiceBillingTerms || '',
         paid: 0
       };
     });
@@ -647,6 +647,9 @@ angular.module('core').controller('TopController', [
     // This provides Authentication context.
     $scope.authentication = Authentication;
     $scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-warning text-warning"></i> Disconnected');
+    $scope.$on('dropstoreAuthenticated', function (event) {
+      $scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-spinner fa-spin text-warning"></i> Connecting');
+    });
     $scope.$on('dropstoreConnected', function (event) {
       $scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-check-circle text-success"></i> Connected');
     });
@@ -1060,6 +1063,7 @@ angular.module('users').factory('Authentication', [
           token: _this._data.isDbAuthorized()
         });
       var c = dropstoreClient.create(client).authenticate({ interactive: false }).then(function (datastoreManager) {
+          $rootScope.$broadcast('dropstoreAuthenticated');
           _datastoreManager = datastoreManager;
           return datastoreManager.openDefaultDatastore();
         }).then(function (datastore) {

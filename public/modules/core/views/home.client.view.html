@@ -7,7 +7,7 @@
     </div>
     <div content-for="navbarBottomLeft">	 
 	  	<a ng-click="selectionMode = !selectionMode " class="btn btn-navbar">
-			<span ng-hide="selectionMode">Invoice</span>
+			<span ng-hide="selectionMode"><i class="fa fa-file-text fa-lg"></i></span>
 			<span class="" ng-show="selectionMode">Cancel</span>
 		</a>
 		<a ng-show="selectionMode" ng-click="prepareInvoice()" class="btn btn-navbar">Submit</a>
@@ -27,7 +27,9 @@
 
 	        <div class="pull-right list-group-item-icon">
 	          <i ng-hide="selectionMode" class="fa fa-chevron-right feature-icon text-primary"></i>
-	          <i ng-show="selectionMode" class="fa fa-lg fa-check-circle feature-icon text-default"></i>
+	          <i ng-show="selectionMode" 
+	          ng-class="{ 'fa-check-square-o' : selectedCases.indexOf(case.getId()) >-1, 'fa-square-o' : selectedCases.indexOf(case.getId()) ===-1}"
+	          class="fa fa-lg feature-icon text-default"></i>
 	        </div>	        
 
 	        <div class="media-body">

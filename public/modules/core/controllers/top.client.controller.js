@@ -7,6 +7,9 @@ angular.module('core').controller('TopController', ['$scope','$location', 'Authe
 		$scope.authentication = Authentication;		
 		$scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-warning text-warning"></i> Disconnected');
 
+		$scope.$on('dropstoreAuthenticated',function(event){
+			$scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-spinner fa-spin text-warning"></i> Connecting');      
+		});
 		$scope.$on('dropstoreConnected',function(event){
 			$scope.connectionStatus = $sce.trustAsHtml('<i class="fa fa-check-circle text-success"></i> Connected'); 		
 		});		

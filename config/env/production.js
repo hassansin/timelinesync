@@ -13,9 +13,9 @@ module.exports = {
 			js: [
 				'public/lib/angular/angular.min.js',
 				'public/lib/angular-resource/angular-resource.min.js',
-				'public/lib/angular-animate/angular-animate.min.js',
+				/*'public/lib/angular-animate/angular-animate.min.js',*/
 				'public/lib/angular-ui-router/release/angular-ui-router.min.js',
-				'public/lib/angular-ui-utils/ui-utils.min.js',
+				/*'public/lib/angular-ui-utils/ui-utils.min.js',*/
 				'public/lib/mobile-angular-ui/dist/js/mobile-angular-ui.min.js',
 				/*'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js'*/
 			]
@@ -54,7 +54,7 @@ module.exports = {
 		callbackURL: 'http://localhost:3000/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'Timelinesync <no-reply@timelinesync.com>',
+		from: process.env.MAILER_FROM || 'Timelinesync.com <no-reply@timelinesync.com>',
 		options: {
 			port: 587,
 			host: 'timelinesync.com',			 	

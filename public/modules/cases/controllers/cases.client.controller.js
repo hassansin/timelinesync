@@ -339,24 +339,20 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
           unitCost: ''
         });
       };
-      $scope.downloadInvoice = function ($attach){                
+      $scope.downloadInvoice = function (){                
                 
         $http({
           method  : 'POST',
           url     : 'download_invoice.php',
           data    : $scope.invoice,  // pass in data as strings
-          headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
+          headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so that angular passes info as form data (not as request payload)
         })
         .success(function(data) {
-          console.log(data);
-          if(data && data.success){
-            if($attach)
-              window.location.href='mailto:?subject='+ encodeURIComponent(data.title)+'&body=%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + encodeURIComponent('Download from: '+data.url);
-            else{              
-              //$document.find('body').append(angular.element('<iframe></iframe>').attr('src',data.url).attr('class','ng-hide'));              
-              window.location.href=data.url;
-              //window.open(data.url);
-            }              
+          //console.log(data);
+          if(data && data.success){                      
+            //$document.find('body').append(angular.element('<iframe></iframe>').attr('src',data.url).attr('class','ng-hide'));              
+            window.location.href=data.url;
+            //window.open(data.url);            
           }
         });
       };
@@ -369,12 +365,11 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
         items: data,
         date: $filter('date')(new Date(),'MMM dd, yyyy'),
         timezoneOffset : new Date().getTimezoneOffset(),
-        phone: info.phone || '',
-        company: info.companyName || '',
-        address1: info.companyAddress1 || '',
-        address2: info.companyAddress2 || '',
+        phone: 'Phone: '+info.phone,
+        companyName: info.companyName || '',
+        address: [info.companyAddress1,info.companyAddress2,info.state,info.zip].filter(function(item){return item;}).join(', ') ,        
         invoiceNo: '', 
-        terms: info.invoiceBillingTerms || '',
+        invoiceBillingTerms: info.invoiceBillingTerms || '',
         paid: 0  
       };          
 		});

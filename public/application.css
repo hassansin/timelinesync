@@ -52,7 +52,7 @@ i.indicator.uploading{color:red;}
 
 #case-list{padding-top: 40px;}
 #case-list a.list-group-item.active, #case-list a.list-group-item.active:focus{
-  background: #F5F5F5;
+  background: #DAEAEC;
   border-color: #fff;
   color: #000;
 }
@@ -101,3 +101,26 @@ a.list-group-item:hover {background-color: #007AFF;}*/
 #userProfile textarea.form-control{height: auto;}
 
 #userAccount .form-group{padding: 0;}
+
+/*INVOICE*/
+
+#invoice textarea{border:none;overflow: hidden; resize: none; border-bottom: 1px solid #f5f5f5;outline: none;}
+#invoice #meta, #invoice #totals table {width: 100%}
+#invoice #meta td, #invoice #totals td{width: 50%}
+#invoice #meta .meta-head, #invoice #totals .total-head{text-align: right;padding-right: 10px;font-weight: bold}
+#invoice #totals .total-value {text-align: left;}
+
+#invoice #meta td textarea,#invoice #totals td textarea { width: 100%; height: 20px; text-align: left; }
+#invoice #company {height: 20px;}
+#invoice #identity textarea{width: 100%;}
+#invoice .panel {margin-bottom: 10px;}
+#invoice .panel-heading{padding: 5px 10px;font-weight: bold;color:#000;letter-spacing: .2em;}
+#invoice .panel-heading h2{font-size:15px;color: #555;text-transform: uppercase; }
+
+#invoice .item {margin:7px; margin-bottom: 20px;border-bottom: 1px dashed #DDD; padding:10px; border: 1px solid #ddd;}
+#invoice .item textarea {height: 20px}
+#invoice .item .description {width: 100%;height: 40px;}
+#invoice .item .cost,#invoice .item .qty {width: 50px}
+#invoice .item .list-group-item-text strong{font-size: 12px;}
+#invoice .item .list-group-item-text{padding-top: 10px;}
+#invoice .item .price {font-size: 16px;}

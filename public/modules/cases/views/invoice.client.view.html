@@ -1,15 +1,128 @@
 <section data-ng-controller="InvoiceController">	
 	<div content-for="navbarActionLeft">            
 		<a href="#!/" class="btn btn-navbar">
-			<i class="fa fa-home fa-lg"></i>
-		</a>		
-    </div>
-    <div content-for="title">
-    	<span>Invoice</span>
-    </div>
+			<i class="fa fa-arrow-left fa-lg"></i>
+		</a>
+		<button ng-click="downloadInvoice()" class="btn btn-navbar">
+			<i class="fa fa-download fa-lg"></i>
+		</button>				
+  </div>
+  <div content-for="navbarBottomLeft">            		
+		<button href="" ng-click="downloadInvoice()" class="btn btn-navbar">
+			<i class="fa fa-download fa-lg"></i>
+		</button>				
+  </div>
+  <div content-for="title">
+  	<span>Invoice</span>
+  </div>
 	<div id="invoice" class="scrollable">  
 	  <div class="scrollable-content">
-	    {{invoice | json }}
+	    <div>		
+	    	<div bs-panel title="">	    
+		    	<table id="meta">
+		        <tr>
+		          <td class="meta-head">Invoice #</td>
+		          <td><textarea placeholder="Invoice No" ng-model="invoice.invoiceNo"></textarea></td>
+		        </tr>
+		        <tr>
+		          <td class="meta-head">Date</td>
+		          <td><textarea ng-model="invoice.date" id="date"></textarea></td>
+		        </tr>
+		        <tr>
+		          <td class="meta-head">Amount Due</td>          	
+		          <td>
+		            <div class="due">
+		              {{ subTotal()-invoice.paid | currency}}
+		            </div>
+		          </td>
+		        </tr>
+		      </table>
+		    </div>
+		    <div id="identity" bs-panel title="Invoice To:">	    
+		    	<textarea id="company" placeholder="Company Name" ng-model="invoice.companyName"></textarea>		    	
+		      <textarea id="address" placeholder="Address, City, State, Zip" ng-model="invoice.address"></textarea>					
+					<textarea rows="1" id="phone" placeholder="Phone" ng-model="invoice.phone"></textarea>
+		  	</div>
+		    <div id="customer" bs-panel title="Invoice Detail:">	    
+		    	<table id="customer-title">
+		    		<tbody>
+		    			<tr>
+		    				<td><strong>Client: &nbsp;</strong></td>
+		    				<td><textarea rows="1" class="customer-title" ng-model="invoice.items[0].case.client"></textarea></td>
+		    			</tr>
+		    			<tr>
+		    				<td><strong>Subject: &nbsp;</strong></td>
+		    				<td><textarea rows="1" class="customer-title" ng-model="invoice.items[0].case.full_name"></textarea></td>
+		    			</tr>
+		    		</tbody>
+		    	</table>    
+		    	<div style="clear:both"></div>    
+		      
+		    </div>
+		    <div id="items">
+		    	<div class="list-group">	      
+		    		<div class="item" ng-repeat="(key, item) in invoice.items">
+		    			<a class="delete" href="" ng-click="removeItem(item)" title="Remove row"><i class="fa fa-times-circle fa-lg"></i></a>
+		        	<div class="media-body">
+		        		<h4 class="list-group-item-heading">
+		        			<textarea class="pull-left item-title" ng-model="item.case.case_no"></textarea>
+		        			<div class="pull-right">
+			          		<strong class="price">{{item.unitCost * item.quantity | currency}}</strong>
+				        	</div>	        
+		        		</h4>	            
+			        	<div class="list-group-item-text">			        		
+			        		<p>&nbsp;</p>
+			        		<p>
+			        			<textarea ng-model="item.description" class="description" placeholder="descriptoin" ></textarea>
+			        		</p>
+			        		<p>
+			        			<strong>Unit Cost: </strong><textarea ng-model="item.unitCost" class="cost"></textarea>
+			        			<strong>Quantity: </strong><textarea ng-model="item.quantity" class="qty"></textarea>
+		        			</p>
+			        	</div>
+		        	</div>
+		    		</div>		    		
+		    	</div>
+		    	<a href="" style="margin-left: 7px" class="btn btn-sm btn-primary" ng-click="addItem()" id="addrow" title="Add a row">Add Item</a>
+		    </div>
+		    <p>&nbsp;</p>
+		    <div id="totals" bs-panel title="Totals">
+		    	<table>
+			    	<tr>			        
+			        <td class="total-head">Subtotal</td>
+			        <td class="total-value">
+			          <div id="subtotal">
+			            {{subTotal() | currency}}
+			          </div>
+			        </td>
+			      </tr>
+			      <tr>			        
+			        <td class="total-head">Total</td>
+			        <td class="total-value">
+			          <div id="total">
+			            {{subTotal() | currency}}
+			          </div>
+			        </td>
+			      </tr>
+			      <tr>			        			        
+			        <td class="total-head">Amount Paid</td>
+			        <td class="total-value"><textarea ng-model="invoice.paid"></textarea></td>			        
+			      </tr>
+			      <tr>			        
+			        <td class="total-head">Balance Due</td>
+			        <td class="total-value">
+			          <div class="due">
+			            {{subTotal() - invoice.paid | currency}}
+			          </div>
+			        </td>
+			      </tr>
+			    </table>			    
+		    </div>		    
+		    <div id="terms" bs-panel>
+		      <h5>Terms</h5>
+		      <textarea style="width:100%;" ng-model="invoice.invoiceBillingTerms"></textarea>
+		    </div>
+		  </div>	
 	  </div>
 	</div>
 </section>

@@ -29,6 +29,7 @@ angular.module('users').factory('Authentication', [
 	    var c = dropstoreClient.create(client)
 	      .authenticate({interactive: false})
 	      .then(function(datastoreManager){                                	        
+	      	$rootScope.$broadcast('dropstoreAuthenticated');
 	        _datastoreManager = datastoreManager;
 	        return datastoreManager.openDefaultDatastore();
 	      })      

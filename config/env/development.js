@@ -36,7 +36,7 @@ module.exports = {
 		callbackURL: 'http://localhost:3000/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'Timelinesync <no-reply@timelinesync.com>',
+		from: process.env.MAILER_FROM || 'Timelinesync.com <no-reply@timelinesync.com>',
 		options: {
 			port: 587,
 			host: 'timelinesync.com',			 										
