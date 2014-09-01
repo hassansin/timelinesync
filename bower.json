@@ -14,6 +14,7 @@
     "font-awesome": "~4.1.0",
     "fastclick": "~1.0.0",
     "overthrow": "~0.7.0",
-    "mobile-angular-ui": "~1.1.0-beta.29"
+    "mobile-angular-ui": "~1.1.0-beta.29",
+    "angular-touch": "~1.2.23"
   }
 }

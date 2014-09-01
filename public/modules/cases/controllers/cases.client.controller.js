@@ -16,6 +16,7 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 			var activityTable = $scope.datastore.getTable('activities');        
       var caseTable = $scope.datastore.getTable('cases');
 			$scope.caseId = $stateParams.caseId;  // current case id        	    			
+			if(!$scope.caseId) return $location.path('/');
       $scope.case = caseTable.get($scope.caseId);
       $scope.activities =  activityTable.query({caseId:$scope.caseId});            	    	    	    
 	    $scope.dirtyActivites = $scope.authentication.dropstore.dirtyActivites; // activities that are not synced            
@@ -36,6 +37,9 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	      angular.forEach(activities, function(act, key) {
 	        data.activities.push(act.getFields());
 	      });
+	      //filter activities based on date	      
+	      data.activities = $filter('orderBy')(data.activities, 'activity_time', false);	      
+	      $scope.downloadDisabled = true;	      
 	      $http({
 	        method  : 'POST',
 	        url     : 'download.php',
@@ -43,6 +47,7 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	        headers : { 'Content-Type': 'application/x-www-form-urlencoded' }  // set the headers so angular passing info as form data (not request payload)
 	      })
 	      .success(function(data) {        
+	      	$scope.downloadDisabled = false;
 	        if(data && data.success){          
 	          if(action && action === '1'){
 	            window.location.href='mailto:?subject='+ encodeURIComponent(data.title)+'&body=%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + encodeURIComponent('Download from: '+data.url);          
@@ -72,7 +77,10 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
 	          }
 	            
 	        }
-	      });
+	      })
+				.error(function(data, status, headers, config){
+					$scope.downloadDisabled = false;
+				});
 	    };
 
 	    $scope.$on('syncStatusChanged',function(event){            

@@ -36,14 +36,14 @@ module.exports = function(grunt) {
 			},
 			clientJS: {
 				files: watchFiles.clientJS,
-				tasks: ['jshint'],
+				tasks: ['jshint','ngmin','uglify'],
 				options: {
 					livereload: true
 				}
 			},
 			clientCSS: {
 				files: watchFiles.clientCSS,
-				tasks: ['csslint'],
+				tasks: ['csslint','cssmin'],
 				options: {
 					livereload: true
 				}

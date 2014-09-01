@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication','$timeout','$filter','$stateParams','$rootScope',
-	function($scope, $http, $location, Users, Authentication,$timeout,$filter,$stateParams,$rootScope) {
+angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication','$timeout','$filter','$stateParams','$rootScope','$state',
+	function($scope, $http, $location, Users, Authentication,$timeout,$filter,$stateParams,$rootScope,$state) {
 		$scope.user = Authentication.user;
 		$scope.passwordDetails = {};
 		
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');		
-
+		if ($state.$current.name==='profile' && !$scope.authentication.isDbAuthorized()) return $location.path('/settings/accounts');								
 				
 		Authentication.connectDropstore().then(function(data){						
 			$scope.datastore = $scope.authentication.dropstore.datastore;					

@@ -44,7 +44,7 @@ angular.module('core').controller('HomeController', ['$scope','$location', 'Auth
 	    			$scope.selectedCases.push(caseId);     		    			
 	    		}
 	    	}
-	      console.log($scope.selectedCases);
+	      //console.log($scope.selectedCases);
 	    };
 	    $scope.prepareInvoice = function (){
 	      //timelineService.setInvoiceItems($scope.selectedCases);
