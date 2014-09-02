@@ -11,8 +11,8 @@ module.exports = {
 		js: 'public/dist/application.min.js'
 	},
 	dropbox : {
-		clientID: 'b4qas6a6edcikvd',
-    clientSecret: 'o9956p89xhtrkbe',
+		clientID: '7wdlkc41dbgy6u2',
+    clientSecret: '811kyyx7u4u7vov',
     callbackURL: 'https://timelinesync.com/auth/dropbox/callback'
 	},
 	facebook: {
