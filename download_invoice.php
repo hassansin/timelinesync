@@ -65,10 +65,10 @@ $pdf->setColor('text',0,0,0);
 
 $pdf->Ln(10);
 
-$pdf->Write(1,$data->company,false,false,'',true);
+$pdf->Write(1,$data->companyName,false,false,'',true);
 $pdf->WriteHTML('<p>'.nl2br($data->address).'</p>',true,false,true);
 if(trim($data->phone))
-	$pdf->Write(1,'Phone: '.$data->phone,false,false,'',true);
+	$pdf->Write(1,$data->phone,false,false,'',true);
 $pdf->Ln(20);
 
 $y1 = $pdf->GetY();
@@ -170,7 +170,7 @@ $pdf->Cell(0, 9, 'TERMS', 'B', true, 'C', 0, '', 0, false, 'M', 'M');
 $pdf->setFontSpacing(0);
 $pdf->SetFont('times', '', 9);
 $pdf->Ln(3);
-$pdf->Cell(0, 9, $data->terms, false, false, 'C', 0, '', 0, false, 'M', 'M');
+$pdf->Cell(0, 9, $data->invoiceBillingTerms, false, false, 'C', 0, '', 0, false, 'M', 'M');
 
 $file = md5($invoiceNo);
 $pdf->Output($download_folder.$file.'.pdf', 'F');

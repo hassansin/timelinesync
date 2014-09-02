@@ -319,11 +319,13 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
         });
 
         
+        var quantity = (arrivalTime - departureTime)/(1000*60*60);
+        quantity = quantity? quantity.toFixed(2): quantity;
 
         data.push({
           'case': caseFields,
           /*'activities' : activities,*/
-          'quantity' : (arrivalTime - departureTime)/(1000*60*60),
+          'quantity' : quantity,
           'unitCost': ''          
         });
       });
@@ -375,7 +377,7 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
         timezoneOffset : new Date().getTimezoneOffset(),
         phone: 'Phone: '+info.phone,
         companyName: info.companyName || '',
-        address: [info.companyAddress1,info.companyAddress2,info.state,info.zip].filter(function(item){return item;}).join(', ') ,        
+        address: [info.companyAddress1,info.companyAddress2,info.companyState,info.companyZip].filter(function(item){return item;}).join(', ') ,        
         invoiceNo: '', 
         invoiceBillingTerms: info.invoiceBillingTerms || '',
         paid: 0  

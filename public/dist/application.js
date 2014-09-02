@@ -23642,9 +23642,11 @@ angular.module('cases').controller('ActivityController', [
           if (actFields.activity_type === 'Base A')
             arrivalTime = actFields.activity_time.getTime();
         });
+        var quantity = (arrivalTime - departureTime) / (1000 * 60 * 60);
+        quantity = quantity ? quantity.toFixed(2) : quantity;
         data.push({
           'case': caseFields,
-          'quantity': (arrivalTime - departureTime) / (1000 * 60 * 60),
+          'quantity': quantity,
           'unitCost': ''
         });
       });
@@ -23694,8 +23696,8 @@ angular.module('cases').controller('ActivityController', [
         address: [
           info.companyAddress1,
           info.companyAddress2,
-          info.state,
-          info.zip
+          info.companyState,
+          info.companyZip
         ].filter(function (item) {
           return item;
         }).join(', '),

@@ -49,7 +49,7 @@ i.indicator.uploading{color:red;}
 .date{font-size: .9em;font-style: italic;}
 #case-list .list-group-item-text { padding: 5px 0px 5px 5px}
 .navbar-absolute-bottom.navbar-app .btn, .navbar-absolute-bottom.navbar-app .btn-navbar {line-height: 30px;}
-
+.has-navbar-bottom .app-body {padding-bottom: 30px;}
 #case-list{padding-top: 40px;}
 #case-list a.list-group-item.active, #case-list a.list-group-item.active:focus{
   background: #DAEAEC;
