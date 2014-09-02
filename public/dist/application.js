@@ -23696,6 +23696,7 @@ angular.module('cases').controller('ActivityController', [
         address: [
           info.companyAddress1,
           info.companyAddress2,
+          info.companyCity,
           info.companyState,
           info.companyZip
         ].filter(function (item) {

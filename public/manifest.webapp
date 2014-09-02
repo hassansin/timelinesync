@@ -1,0 +1,14 @@
+{
+  "name": "Timelinesync.com",
+  "description": "Timelinesync.com",
+  "launch_path": "/",
+  "icons": {
+    "128": "/modules/core/img/brand/log.png"
+  },
+  "developer": {
+    "name": "hassansin",
+    "url": "mailto:rezatxe@gmail.com"
+  },
+  "default_locale": "en",
+  "fullscreen": true
+}

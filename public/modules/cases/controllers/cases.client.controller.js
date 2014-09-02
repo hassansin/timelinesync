@@ -377,7 +377,7 @@ angular.module('cases').controller('ActivityController', ['$scope','$location', 
         timezoneOffset : new Date().getTimezoneOffset(),
         phone: 'Phone: '+info.phone,
         companyName: info.companyName || '',
-        address: [info.companyAddress1,info.companyAddress2,info.companyState,info.companyZip].filter(function(item){return item;}).join(', ') ,        
+        address: [info.companyAddress1,info.companyAddress2,info.companyCity,info.companyState,info.companyZip].filter(function(item){return item;}).join(', ') ,        
         invoiceNo: '', 
         invoiceBillingTerms: info.invoiceBillingTerms || '',
         paid: 0  

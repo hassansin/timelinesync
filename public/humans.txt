@@ -3,13 +3,13 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    hassansin -- developer -- @hassansine
 
 # THANKS
 
-    <name>
+    Timelinesync.com
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3
-    jQuery, Modernizr
+    AngularJS, Node.js, MongoDB
+    

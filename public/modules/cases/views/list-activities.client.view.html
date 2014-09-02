@@ -48,7 +48,7 @@
 		        	<div class="list-group-item-text">
 		        		<p>
 		        			<i class="fa fa-info-circle indicator pull-right" ng-class="{uploading: dirtyActivites.indexOf(act.getId()) > -1}"></i>
-							<!-- <span class="label label-primary">{{act.get('activity_type')}}</span> -->
+							<span class="label label-primary">{{act.get('activity_type')}}</span>
 							<span class="text-danger"><strong>{{act.get('activity_time') | date: 'hh:mm a' }}</strong></span>
 						</p>
 						<p>{{act.get('activity')}}</p>
