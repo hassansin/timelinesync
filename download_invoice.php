@@ -89,7 +89,8 @@ $total = 0;
 foreach ($data->items as $item) {
 	$total = $total + floatval(@$item->unitCost*@$item->quantity);
 	$str .= '<tr>';
-	$str .= '<td style="'.$bl.'">'.@$item->case->case_no.'</td>';
+	$str .= '<td style="'.$bl.'">'.@$item->case->activity_date.'</td>';
+	$str .= '<td>'.@$item->case->case_no.'</td>';
 	$str .= '<td>'.@$item->description.'</td>';
 	$str .= '<td>'.currency(@$item->unitCost).'</td>';
 	$str .= '<td>'.@$item->quantity.'</td>';
@@ -132,8 +133,9 @@ $pdf->Ln(1);
 $table = <<<HTML
 <table cellpadding="10" cellspacing="0" border="0">
 	<tr>
-		<th style="{$b}text-align:center;width:168px">Item</th>
-		<th style="{$b}text-align:center;width:271px">Description</th>
+		<th style="{$b}text-align:center;width:120px">Date</th>
+		<th style="{$b}text-align:center;width:120px">Item</th>
+		<th style="{$b}text-align:center;width:199px">Description</th>
 		<th style="{$b}text-align:center;width:85px">Unit Cost</th>
 		<th style="{$b}text-align:center;width:85px">Quantity</th>
 		<th style="{$b}text-align:center;width:95px">Price</th>
@@ -141,22 +143,22 @@ $table = <<<HTML
 	{$str}
 
 	<tr>
-		<td colspan="2" style="{$bl}"></td>
+		<td colspan="3" style="{$bl}"></td>
 		<td colspan="2" style="{$bl}{$bt}{$bb}text-align:right">Subtotal</td>
 		<td style="{$br}{$bt}{$bb}">{$total}</td>
 	</tr>
 	<tr>
-		<td colspan="2" style="{$bl}text-align"></td>
+		<td colspan="3" style="{$bl}text-align"></td>
 		<td colspan="2" style="{$bl}{$bt}{$bb}text-align:right;">Total</td>
 		<td style="{$br}{$bt}{$bb}">{$total}</td>
 	</tr>
 	<tr>
-		<td colspan="2" style="{$bl}text-align"></td>
+		<td colspan="3" style="{$bl}text-align"></td>
 		<td colspan="2" style="{$bl}{$bt}{$bb}text-align:right;">Amount Paid</td>
 		<td style="{$br}{$bt}{$bb}">{$paid}</td>
 	</tr>
 	<tr>
-		<td colspan="2" style="{$bl}{$bb}text-align"></td>
+		<td colspan="3" style="{$bl}{$bb}text-align"></td>
 		<td colspan="2" style="{$bl}{$bt}{$bb}text-align:right;">Balance Due</td>
 		<td style="{$br}{$bt}{$bb}">{$due}</td>
 	</tr>

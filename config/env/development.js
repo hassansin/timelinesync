@@ -6,8 +6,8 @@ module.exports = {
 		title: 'Timelinesync - Development Environment'
 	},
 	dropbox : {
-		clientID: 'quk9uarfbckjpd9',
-    clientSecret: 'l4stpf33aqoy226',
+		clientID: 'b4qas6a6edcikvd',
+    clientSecret: 'o9956p89xhtrkbe',
     callbackURL: 'http://localhost:3000/auth/dropbox/callback'
 	},
 	facebook: {
