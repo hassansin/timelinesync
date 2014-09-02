@@ -23627,6 +23627,7 @@ angular.module('cases').controller('ActivityController', [
         var caseFields = caseTable.get(id).getFields();
         //get case
         caseFields.full_name = caseFields.first_name + ' ' + caseFields.last_name;
+        caseFields.activity_date = $filter('date')(caseFields.activity_date, 'MM/dd/yyyy');
         caseFields.id = id;
         var actList = activityTable.query({ caseId: id });
         // get all activities for this case
