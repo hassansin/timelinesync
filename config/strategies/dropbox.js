@@ -8,7 +8,10 @@ var passport = require('passport'),
 	DropboxStrategy = require('passport-dropbox-oauth2').Strategy,
 	config = require('../config'),
 	users = require('../../app/controllers/users');
-	//console.log(require('util').inspect(DropboxStrategy.super_,{showHidden:true,depth:null}));
+
+	DropboxStrategy.prototype.authorizationParams = function(){		
+		return {force_reapprove :true};
+	};
 
 module.exports = function() {
 	// Use dropbox strategy

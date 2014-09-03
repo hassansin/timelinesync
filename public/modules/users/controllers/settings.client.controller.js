@@ -86,13 +86,13 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 
 		// Change user password		
 		$scope.changeUserPassword = function() {
-			$scope.success = $scope.error = null;			
+			$scope.success2 = $scope.error2 = null;			
 			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
 				// If successful show success message and clear form
-				$scope.success = true;
+				$scope.success2 = true;
 				$scope.passwordDetails = null;
 			}).error(function(response) {
-				$scope.error = response.message;
+				$scope.error2 = response.message;
 			});
 		};
 	}

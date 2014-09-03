@@ -129,3 +129,5 @@ button.btn:disabled {
   cursor: not-allowed;
   pointer-events:auto;
 }
+
+.dropbox-connect .active{background-color: #DAEAEC;}

@@ -6,14 +6,14 @@
     </div>	
     <div id="userAccount" class="scrollable">  
 		<div class="scrollable-content">
-			<div data-ng-hide="isConnectedSocialAccount('dropbox')" bs-panel title="Connect Dropbox:">	     									
+			<div class="dropbox-connect" data-ng-hide="isConnectedSocialAccount('dropbox')" bs-panel title="Connect Dropbox:">	     									
 				<div class="text-center">
 					<a href="/auth/dropbox" class="undecorated-link btn btn-default">
 						<img width="60" src="/modules/users/img/buttons/dropbox.png">
 					</a>			
 				</div>
 			</div>
-			<div data-ng-show="isConnectedSocialAccount('dropbox')" bs-panel title="You're now connected.">	     									
+			<div class="dropbox-connect" data-ng-show="isConnectedSocialAccount('dropbox')" bs-panel title="You're now connected.">	     									
 				<div class="text-center">
 					<a data-ng-click="removeUserSocialAccount('dropbox')" class="undecorated-link btn btn-default active">
 						<img width="60" src="/modules/users/img/buttons/dropbox.png">						
@@ -29,11 +29,11 @@
 			        <input bs-form-control type="password" ng-model="passwordDetails.verifyPassword" label="Verify Password"/>
 
 			        
-			        <div data-ng-show="success" class="text-center text-success">
+			        <div data-ng-show="success2" class="text-center text-success">
 						<strong>Password Changed Successfully</strong>
 					</div>
-					<div data-ng-show="error" class="text-center text-danger">
-						<strong data-ng-bind="error"></strong>
+					<div data-ng-show="error2" class="text-center text-danger">
+						<strong data-ng-bind="error2"></strong>
 					</div>	
 				</div>
 				<div bs-panel class="form-actions">			      					
