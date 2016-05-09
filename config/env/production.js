@@ -11,8 +11,8 @@ module.exports = {
 		js: 'public/dist/application.min.js'
 	},
 	dropbox : {
-		clientID: '7wdlkc41dbgy6u2',
-    clientSecret: '811kyyx7u4u7vov',
+		clientID: '',
+    clientSecret: '',
     callbackURL: 'https://timelinesync.com/auth/dropbox/callback'
 	},
 	facebook: {
@@ -44,12 +44,12 @@ module.exports = {
 		from: process.env.MAILER_FROM || 'Timelinesync.com <no-reply@timelinesync.com>',
 		options: {
 			port: 587,
-			host: 'timelinesync.com',			 	
-			tls: {rejectUnauthorized: false},		    
+			host: 'timelinesync.com',
+			tls: {rejectUnauthorized: false},
 			auth: {
 				user: process.env.MAILER_EMAIL_ID || 'postmaster@timelinesync.com',
-				pass: process.env.MAILER_PASSWORD || 'fnty8lPMtbbo'
-			}			
+				pass: process.env.MAILER_PASSWORD || ''
+			}
 		}
 	}
 };

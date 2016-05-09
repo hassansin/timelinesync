@@ -1,4 +1,0 @@
-Array
-(
-    [payload] => {"repository": {"website": "", "fork": false, "name": "timelinesync", "scm": "git", "owner": "hassansin", "absolute_url": "/hassansin/timelinesync/", "slug": "timelinesync", "is_private": true}, "truncated": false, "commits": [{"node": "55930d81af21", "files": [{"type": "modified", "file": "public/modules/core/controllers/home.client.controller.js"}, {"type": "modified", "file": "public/modules/core/controllers/top.client.controller.js"}, {"type": "modified", "file": "public/modules/users/services/authentication.client.service.js"}], "raw_author": "hassansin <mhkr63@gmail.com>", "utctimestamp": "2014-08-30 08:17:21+00:00", "author": "hassansin", "timestamp": "2014-08-30 10:17:21", "raw_node": "55930d81af217ab3f4c9d33199c10a2e2534ca0f", "parents": ["184257f98855"], "branch": "master", "message": "bugfix with topcontroller\n", "revision": null, "size": -1}], "canon_url": "https://bitbucket.org", "user": "hassansin"}
-)
